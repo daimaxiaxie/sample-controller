@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-controller
+  labels:
+    app: sample-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-controller
+  template:
+    metadata:
+      name: sample-controller
+      labels:
+        app: sample-controller
+    spec:
+      containers:
+        - name: sample-controller
+          image: samplecontroller:v0.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "1"
+              memory: "64Mi"
+            limits:
+              cpu: "2"
+              memory: "512Mi"
+      restartPolicy: Always
+      serviceAccountName: developer
+      
